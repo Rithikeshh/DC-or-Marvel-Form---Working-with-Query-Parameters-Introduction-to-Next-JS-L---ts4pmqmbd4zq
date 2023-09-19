@@ -17,7 +17,7 @@ const App = () => {
           <h1>Step 1: Select Form Type and Enter Age</h1>
           <label>
             Enter your age:
-            <input value={age} onInput={(e)=>{
+            <input value={age} type="number" onInput={(e)=>{
               setAge(parseInt(e.target.value))
             }}/>
           </label>
