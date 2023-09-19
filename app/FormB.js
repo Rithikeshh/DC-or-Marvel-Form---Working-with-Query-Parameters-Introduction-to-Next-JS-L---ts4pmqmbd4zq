@@ -1,19 +1,30 @@
 'use client'
 import { useState, useEffect } from "react";
-function FormB({ onSubmit, age }) {
+function FormB({ setFormData, onSubmit, age }) {
     const [marvelShows, setMarvelShows] = useState("");
 
     const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log("HI")
+        let formData = new FormData(event.target);
+        if(formData.get("movie")){
+            onSubmit(4)
+            setFormData({
+                age:age,
+                type:"B",
+                show:formData.get("movie")
+            })
+        }
     };
 
 
 
     return (
-        <form id="marvel" >
+        <form id="marvel" onSubmit={handleSubmit}>
             <h2>Form B</h2>
             <label>
                 Select Marvel Shows:
-                <select  >
+                <select  name="movie">
                     <option value="">--Select--</option>
                     <option value="WandaVision">WandaVision</option>
                     <option value="The Falcon and the Winter Soldier">

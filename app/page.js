@@ -17,7 +17,9 @@ const App = () => {
           <h1>Step 1: Select Form Type and Enter Age</h1>
           <label>
             Enter your age:
-            <input value={age} />
+            <input value={age} onInput={(e)=>{
+              setAge(parseInt(e.target.value))
+            }}/>
           </label>
           <br />
           <label>
@@ -35,12 +37,12 @@ const App = () => {
       )}
       {step === 2 && (
         <div>
-          <FormA age={age} />
+          <FormA setFormData={setFormData} onSubmit={setStep} age={age} />
         </div>
       )}
       {step === 3 && (
         <div>
-          <FormB age={age} />
+          <FormB setFormData={setFormData} onSubmit={setStep} age={age} />
         </div>
       )}
       {(step === 2 || step === 3) && age ? (
@@ -49,8 +51,12 @@ const App = () => {
 
       {step === 4 && (
         <div>
-          <Summary />
-          <button id="start-over">Start Over</button>
+          <Summary formData={formData}/>
+          <button id="start-over" onClick={()=>{
+            setAge("")
+            setFormData({})
+            setStep(1)
+          }}>Start Over</button>
         </div>
       )}
     </div>
